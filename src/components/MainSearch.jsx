@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
 import Job from "./Job";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +17,15 @@ const MainSearch = () => {
   // const [jobs, setJobs] = useState([]);
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobs.content);
+  const isLoading = useSelector(
+    (state) => state.jobs.isLoading
+  );
+  const hasError = useSelector(
+    (state) => state.jobs.hasError
+  );
+  const errorMessage = useSelector(
+    (state) => state.jobs.errorMessage
+  );
   const handleChange = (e) => {
     setQuery(e.target.value);
   };
@@ -43,6 +59,10 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
+          {isLoading && <Spinner animation="border" />}
+          {hasError && !isLoading && (
+            <Alert variant="danger">{errorMessage}</Alert>
+          )}
           {jobs.map((jobData) => (
             <Job key={jobData._id} data={jobData} />
           ))}
