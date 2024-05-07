@@ -17,6 +17,9 @@ const MainSearch = () => {
   // const [jobs, setJobs] = useState([]);
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobs.content);
+  const userSearch = useSelector(
+    (state) => state.queryuser.content
+  );
   const isLoading = useSelector(
     (state) => state.jobs.isLoading
   );
@@ -36,7 +39,7 @@ const MainSearch = () => {
   };
   useEffect(() => {
     dispatch(jobsSearched());
-  }, []);
+  }, [userSearch]);
 
   return (
     <Container>
