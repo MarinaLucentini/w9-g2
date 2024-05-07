@@ -1,11 +1,15 @@
 import {
   ADD_TO_FAVORITES,
+  QUERY_USER,
   REMOVE_FROM_FAVORITES,
 } from "../action";
 
 const initialState = {
   favoriteCompany: {
     content: [],
+  },
+  queryUser: {
+    content: "",
   },
 };
 const mainReducer = (state = initialState, action) => {
@@ -21,6 +25,11 @@ const mainReducer = (state = initialState, action) => {
         content: state.content.filter(
           (company) => company !== action.payload
         ),
+      };
+    case QUERY_USER:
+      return {
+        ...state,
+        content: action.payload,
       };
 
     default:
