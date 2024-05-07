@@ -19,11 +19,10 @@ export const queryUser = (inputValue) => ({
   type: QUERY_USER,
   payload: inputValue,
 });
-export const jobsSearched = (dispatch, getState) => {
-  const currentState = getState();
-  const query = currentState.queryuser.content;
-
-  return async () => {
+export const jobsSearched = () => {
+  return async (dispatch, getState) => {
+    const currentState = getState();
+    const query = currentState.queryuser.content;
     try {
       const resp = await fetch(
         "https://strive-benchmark.herokuapp.com/api/jobs?search=" +

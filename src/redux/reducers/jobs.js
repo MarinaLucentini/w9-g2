@@ -16,7 +16,7 @@ const jobsreduce = (state = initialState, action) => {
     case GET_JOBS:
       return {
         ...state,
-        content: [...state.content, action.payload],
+        content: action.payload,
       };
     case GET_JOBS_LOADING_ON:
       return {
